@@ -39,21 +39,5 @@ class Stack:
     # prints all items in the list 'items' starting from the last position
     #===========================================
     def printStack(self):
-        print('printStack() func called')
         for item in reversed(self.items):
             print(item)
-
-if __name__ == '__main__':
-
-  s=Stack()
-
-  print(s.isEmpty())
-  s.push(6)
-  s.push(5)
-  s.push(4)
-  s.push(3)
-  s.push(2)
-  s.push(1)
-  print(s.isEmpty())
-  print(s.size())
-  s.printStack()
