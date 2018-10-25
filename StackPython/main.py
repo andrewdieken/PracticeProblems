@@ -1,5 +1,5 @@
 import Stack
 
-
-s=Stack()
-print(s.isEmpty())
+if __name__ == '__main__':
+    s=Stack.Stack()
+    print(s.isEmpty())

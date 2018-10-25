@@ -43,7 +43,6 @@ class Stack:
         for item in reversed(self.items):
             print(item)
 
-
 if __name__ == '__main__':
 
   s=Stack()
