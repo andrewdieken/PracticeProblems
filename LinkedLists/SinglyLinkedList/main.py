@@ -16,3 +16,11 @@ if __name__ == '__main__':
     print(my_list.get(0))
     my_list.remove(2)
     my_list.display()
+
+    #prepend
+    my_list.prepend(9)
+    my_list.display()
+
+    #remove head
+    my_list.remove_head()
+    my_list.display()

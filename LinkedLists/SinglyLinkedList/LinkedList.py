@@ -22,6 +22,16 @@ class linked_list:
         cur.next = new_node
 
     #=================================================
+    # adds a new node to the begining of the linkedlist
+    #=================================================
+    def prepend(self, data):
+        new_node = node(data)
+        cur = self.head
+
+        new_node.next = cur.next
+        cur.next = new_node
+
+    #=================================================
     # returns the number of nodes in the linkedlist
     #=================================================
     def length(self):
@@ -74,3 +84,15 @@ class linked_list:
                 prev.next = cur.next
                 return(print('deleted:',cur.data))
             cur_index+=1
+
+    #=================================================
+    # deletes the front node
+    #=================================================
+    def remove_head(self):
+        if self.head.next == None:
+            print('ERROR: no items in list')
+            return
+        cur = self.head
+        target_node = cur.next
+        cur.next =target_node.next
+        return(print('deleted:',target_node.data))
