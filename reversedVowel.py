@@ -34,12 +34,20 @@ def swap(string, left_pos, right_pos):
 def reversed(string):
     left = 0
     right = len(string)-1
+    found_left = False
+    found_right = False
     while left < right:
         while left < right and not isVowel(string[left]):
             left+=1
+        if left != right:
+            found_left = True
         while left < right and not isVowel(string[right]):
             right-=1
-        if isVowel(string[left]) and isVowel(string[right]):
+        if left != right:
+            found_right = True
+        # if isVowel(string[left]) and isVowel(string[right]):
+        #     string = swap(string, left, right)
+        if found_left and found_right:
             string = swap(string, left, right)
         left+=1
         right-=1
@@ -50,7 +58,7 @@ def reversed(string):
 # Main
 #==================================================
 if __name__ == '__main__':
-    string = 'engineering'
+    string = 'apple'
     print(string)
     new_string = reversed(string)
     print(new_string)
