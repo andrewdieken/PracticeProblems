@@ -22,3 +22,11 @@ def has_cycle(head):
             return True
 
     return False
+
+
+# The theory behind it: you must traverse the list using 2 pointers that we'll
+# to as slow and fast. Our slow pointer moves forward 1 node at a time, and our fast
+# pointer moves forward 2 nodes at a time. If at any point in time the 2 pointers refer
+# to the same object, then there is a loop. Other wise the list does not contain a loop.
+# IF THERE IS A LOOP OUR FAST POINTER WILL AT SOME TIME POINT TO THE SAME NODE AS OUR SLOW POINTER.
+  
