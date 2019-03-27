@@ -4,11 +4,8 @@ class Node:
         self.left = None
         self.right = None
 
-    def get(self):
+    def getVal(self):
         return self.val
-
-    def set(self, val):
-        self.val = val
 
     # Returns the children in an Array
     def getChildren(self):
@@ -23,25 +20,32 @@ class BinarySearchTree:
     def __init__(self):
         self.root = None
 
-    def insert(self, val):
-        newNode = Node(val)
-        if self.root == None:
-            root = newNode
+    def getRoot(self):
+        return self.root
+
+    def isEmpty(self):
+        return self.root == None
+
+    def insert(self, newVal):
+        if(self.root == None):
+            self.root = Node(newVal)
+            print("Added {} to root".format(self.root.val))
         else:
             current = self.root
             while(True):
-                if(newNode.val < current.val):
-                    if(current.left == None):
-                        current.left = newNode
+                parent = current
+                if(newVal < current.val):
+                    current = current.left
+                    if(current == None):
+                        parent.left = Node(newVal)
+                        print("Added {} to left child of {}".format(newVal, parent.val))
                         break
-                    else:
-                        current = current.left
                 else:
-                    if(current.right == None):
-                        current.right = newNode
+                    current = current.right
+                    if(current == None):
+                        parent.right = Node(newVal)
+                        print("Added {} to right child of {}".format(newVal, parent.val))
                         break
-                    else:
-                        current = current.right
 
     def getMin(self):
         if (self.root == None):
@@ -66,13 +70,17 @@ class BinarySearchTree:
 if __name__ == '__main__':
     testTree = BinarySearchTree()
 
-    print("Insert 5")
+    testTree.insert(8)
     testTree.insert(5)
-    print(testTree.getMin())
-
-    print("Insert 10")
+    testTree.insert(3)
+    testTree.insert(6)
     testTree.insert(10)
-    print("Insert 2")
-    testTree.insert(2)
-    print(testTree.getMin())
-    print(testTree.getMax())
+    testTree.insert(9)
+    testTree.insert(12)
+
+    root = testTree.getRoot()
+    print("Root:",root.getVal())
+    min = testTree.getMin()
+    max = testTree.getMax()
+    print("Min:",min.getVal())
+    print("Max:",max.getVal())
