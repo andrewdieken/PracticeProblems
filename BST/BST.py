@@ -65,8 +65,50 @@ class BinarySearchTree:
                 current = current.right
             return current
 
+    def contains(self, value):
+        if(self.root == None):
+            return False
+        else:
+            current = self.root
+            while(current.val != value):
+                if(value < current.val):
+                    current = current.left
+                else:
+                    current = current.right
+                if(current == None):
+                    return False
+
+            return True
+
+    def inOrder(self, node):
+        if(node != None):
+            # UNCOMMENT: if you want to understand how the recursive calls work
+            # print("inOrder({})".format(node.val))
+            self.inOrder(node.left)
+            print(node.val)
+            self.inOrder(node.right)
+
+    def preOrder(self, node):
+        if(node != None):
+            print(node.val)
+            self.preOrder(node.left)
+            self.preOrder(node.right)
+
+    def postOrder(self, node):
+        if(node != None):
+            self.postOrder(node.left)
+            self.postOrder(node.right)
+            print(node.val)
 
 
+
+
+
+
+
+#===============================================================================
+# MAIN
+#===============================================================================
 if __name__ == '__main__':
     testTree = BinarySearchTree()
 
@@ -84,3 +126,9 @@ if __name__ == '__main__':
     max = testTree.getMax()
     print("Min:",min.getVal())
     print("Max:",max.getVal())
+
+    print(testTree.contains(13))
+
+    testTree.inOrder(testTree.getRoot())
+    testTree.preOrder(testTree.getRoot())
+    testTree.postOrder(testTree.getRoot())
