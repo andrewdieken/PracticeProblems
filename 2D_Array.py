@@ -11,7 +11,8 @@
 # a b c
 #   d
 # e f g
-# There are  hourglasses in , and an hourglass sum is the sum of an hourglass' values. Calculate the hourglass sum for every hourglass in , then print the maximum hourglass sum.
+# There are  hourglasses in , and an hourglass sum is the sum of an hourglass' values. Calculate the hourglass sum for
+#    every hourglass in , then print the maximum hourglass sum.
 #
 # For example, given the 2D array:
 #
@@ -91,8 +92,8 @@ def hourglassSum(arr):
             bottom_1 = arr[i+2][j]
             bottom_2 = arr[i+2][j+1]
             bottom_3 = arr[i+2][j+2]
-            temp = top_1+top_2+top_3+middle+bottom_1+bottom_2+bottom_3
-            if temp > largest_sum:
-                largest_sum = temp
+            new_sum = top_1+top_2+top_3+middle+bottom_1+bottom_2+bottom_3
+            if new_sum > largest_sum:
+                largest_sum = new_sum
 
     return(largest_sum)
