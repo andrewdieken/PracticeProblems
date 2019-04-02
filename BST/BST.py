@@ -100,6 +100,53 @@ class BinarySearchTree:
             self.postOrder(node.right)
             print(node.val)
 
+    def delete(self, val):
+        if self.isEmpty():
+            return 'Tree is empty'
+        else:
+            current = self.root
+            deleteNode = None
+
+            # Find node
+            while(True):
+                parent = current
+                if(current.val == None):
+                    return('{} does not exist'.format(val))
+                elif(val < current.val):
+                    current = current.left
+                elif(val > current.val):
+                    current = current.right
+                else:
+                    deleteNode = current
+                    break
+
+            # Delete node
+            if(self.hasLeftChild(deleteNode) and self.hasRightChild(deleteNode)):
+                # find largest or smallest node in sub tree
+                return 'has 2 children'
+            elif(not self.hasLeftChild(deleteNode) and not self.hasRightChild(deleteNode)):
+                if(deleteNode.val < parent.val):
+                    parent.left = None
+                else:
+                    parent.right = None
+                return 'has no children'
+            elif(self.hasLeftChild(deleteNode)):
+                return 'has left child'
+            else:
+                return 'has right child'
+
+
+
+    def hasRightChild(self, node):
+        return node.right != None
+
+    def hasLeftChild(self, node):
+        return node.left != None
+
+
+
+
+
 
 
 
@@ -119,16 +166,19 @@ if __name__ == '__main__':
     testTree.insert(10)
     testTree.insert(9)
     testTree.insert(12)
+    testTree.insert(4)
 
-    root = testTree.getRoot()
-    print("Root:",root.getVal())
-    min = testTree.getMin()
-    max = testTree.getMax()
-    print("Min:",min.getVal())
-    print("Max:",max.getVal())
+    print(testTree.delete(3))
 
-    print(testTree.contains(13))
-
-    testTree.inOrder(testTree.getRoot())
-    testTree.preOrder(testTree.getRoot())
-    testTree.postOrder(testTree.getRoot())
+    # root = testTree.getRoot()
+    # print("Root:",root.getVal())
+    # min = testTree.getMin()
+    # max = testTree.getMax()
+    # print("Min:",min.getVal())
+    # print("Max:",max.getVal())
+    #
+    # print(testTree.contains(13))
+    #
+    # testTree.inOrder(testTree.getRoot())
+    # testTree.preOrder(testTree.getRoot())
+    # testTree.postOrder(testTree.getRoot())
