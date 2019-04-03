@@ -47,20 +47,20 @@ class BinarySearchTree:
                         print("Added {} to right child of {}".format(newVal, parent.val))
                         break
 
-    def getMin(self):
-        if (self.root == None):
+    def getMin(self, root):
+        if (root == None):
             return None
         else:
-            current = self.root
+            current = root
             while(current.left != None):
                 current = current.left
             return current
 
-    def getMax(self):
-        if (self.root == None):
+    def getMax(self, root):
+        if (root == None):
             return None
         else:
-            current = self.root
+            current = root
             while(current.right != None):
                 current = current.right
             return current
@@ -101,40 +101,81 @@ class BinarySearchTree:
             print(node.val)
 
     def delete(self, val):
-        if self.isEmpty():
-            return 'Tree is empty'
+        if(self.contains(val)):
+            root = delete(root, val)
+            return True
         else:
-            current = self.root
-            deleteNode = None
+            return False
 
-            # Find node
-            while(True):
-                parent = current
-                if(current.val == None):
-                    return('{} does not exist'.format(val))
-                elif(val < current.val):
-                    current = current.left
-                elif(val > current.val):
-                    current = current.right
-                else:
-                    deleteNode = current
-                    break
-
-            # Delete node
-            if(self.hasLeftChild(deleteNode) and self.hasRightChild(deleteNode)):
-                # find largest or smallest node in sub tree
-                return 'has 2 children'
-            elif(not self.hasLeftChild(deleteNode) and not self.hasRightChild(deleteNode)):
-                if(deleteNode.val < parent.val):
-                    parent.left = None
-                else:
-                    parent.right = None
-                return 'has no children'
-            elif(self.hasLeftChild(deleteNode)):
-                return 'has left child'
+    def delete(self, val):
+        current = self.root
+        # find the node with the specified value
+        while(current.val != val):
+            parent = current
+            if(val < current.val):
+                current = current.left
             else:
-                return 'has right child'
+                current = current.right
+            if(current == None):
+                return False
+        #
+        # Node has NO CHILDREN
+        #
+        if (current.left == None and current.right == None):
+            # check if current is root
+            if(current == self.root):
+                root = None
+            # current is the left child of parent
+            elif(val < parent.val):
+                parent.left = None
+            # current is the right child of parent
+            else:
+                parent.right = None
+        #
+        # Node has only LEFT CHILD
+        #
+        elif(self.hasLeftChild(current)):
+            # check if current is root
+            if(current == self.root):
+                root = current.left
+            # current is the left child of parent
+            elif(val < parent.val):
+                parent.left = current.left
+            # current is the right child of parent
+            else:
+                parent.right = current.left
+        #
+        # Node has only RIGHT CHILD
+        #
+        elif(self.hasRightChild(current)):
+            # check if current is root
+            if(current == self.root):
+                root = current.right
+            # current is left child of parent
+            elif(val < parent.val):
+                parent.left = current.right
+            else:
+                parnet.right = current.right
+        #
+        # Node as LEFT & RIGHT CHILDREN
+        #
+        else:
+            # get the largest node in the left subtree
+            successor = self.getMax(current.left)
+            # check if current is root
+            if(current == self.root):
+                root = successor
+                # TODO: replace successor with None
+            # current is left child of parent
+            elif(val < parent.val):
+                parent.left = successor
+                # TODO: replace successor with None
+            # current is right child of parent
+            else:
+                parent.right = successor
+                # TODO: replace successor with None
 
+        return True
 
 
     def hasRightChild(self, node):
@@ -168,7 +209,9 @@ if __name__ == '__main__':
     testTree.insert(12)
     testTree.insert(4)
 
-    print(testTree.delete(3))
+    testTree.inOrder(testTree.getRoot())
+    print(testTree.delete(8))
+    testTree.inOrder(testTree.getRoot())
 
     # root = testTree.getRoot()
     # print("Root:",root.getVal())
